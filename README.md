@@ -25,7 +25,7 @@ firebase.initializeApp(config)
 
 const auth = firebase.auth()
 const firestore = firebase.firestore()
-Tart.initialize(firestore)
+Torte.initialize(firestore)
 ```
 
 Other Interfaces are just the same as tart.

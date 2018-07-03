@@ -25,5 +25,5 @@ export declare class Snapshot<T extends Tart.Timestamps> {
     delete(): Promise<void>;
     deleteWithBatch(batch: firebase.firestore.WriteBatch): void;
 }
-export declare const makeNotSavedSnapshot: <T extends Tart.Timestamps>(path: string, data: T) => Snapshot<T>;
+export declare const makeNotSavedSnapshot: <T extends Tart.Timestamps>(path: string, data: T, id?: string | undefined) => Snapshot<T>;
 export declare const fetch: <T extends Tart.Timestamps>(pathOrDocumentReference: string | firebase.firestore.DocumentReference, id?: string | undefined) => Promise<Snapshot<T>>;

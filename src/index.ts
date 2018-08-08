@@ -1,6 +1,8 @@
 import * as Tart from '@star__hoshi/tart'
 import * as firebase from 'firebase'
 
+type Partial<T> = { [P in keyof T]?: T[P]; }
+
 let firestore: firebase.firestore.Firestore
 
 export const initialize = (_firestore: firebase.firestore.Firestore) => {
@@ -22,6 +24,14 @@ export class Snapshot<T extends Tart.Timestamps> {
       this.ref = a
       this.data = b
     }
+  }
+
+  get firestoreURL(): string | undefined {
+    const _firestore = this.ref.firestore as any
+    if (_firestore && _firestore._referencePath && _firestore._referencePath._projectId) {
+      return `https://console.firebase.google.com/project/${_firestore._referencePath._projectId}/database/firestore/data/${this.ref.path}`
+    }
+    return undefined
   }
 
   private setCreatedDate() {
@@ -71,7 +81,7 @@ export class Snapshot<T extends Tart.Timestamps> {
     return ncs
   }
 
-  update(data: { [id: string]: any }) {
+  update(data: Partial<T>) {
     data.updatedAt = new Date()
     Object.keys(data).forEach(key => {
       this.data[key] = data[key]
@@ -79,7 +89,7 @@ export class Snapshot<T extends Tart.Timestamps> {
     return this.ref.update(data)
   }
 
-  updateWithBatch(batch: firebase.firestore.WriteBatch, data: { [id: string]: any }) {
+  updateWithBatch(batch: firebase.firestore.WriteBatch, data: Partial<T>) {
     data.updatedAt = new Date()
     Object.keys(data).forEach(key => {
       this.data[key] = data[key]

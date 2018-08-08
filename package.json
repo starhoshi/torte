@@ -1,6 +1,6 @@
 {
   "name": "@star__hoshi/torte",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "@star__hoshi/tart for Frontend",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

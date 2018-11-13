@@ -133,6 +133,9 @@ function toInput<T extends Tart.Timestamps>(data: T) {
   let result: any = {}
   for (let attr in data) {
     if (data[attr] instanceof Date) {
+      if (!data[attr]) {
+        continue
+      }
       const date = data[attr] as any as Date
       result[attr] = firebase.firestore.Timestamp.fromDate(date)
     } else {

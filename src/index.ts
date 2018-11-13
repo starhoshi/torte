@@ -148,6 +148,9 @@ function toOutput<T extends Tart.Timestamps>(data: T) {
   let result: any = {}
   for (let attr in data) {
     if (data[attr] instanceof firebase.firestore.Timestamp) {
+      if (!data[attr]) {
+        continue
+      }
       const date = data[attr] as any as firebase.firestore.Timestamp
       result[attr] = date.toDate()
     } else {

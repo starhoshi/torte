@@ -19,7 +19,7 @@ export class Snapshot<T extends Tart.Timestamps> {
   constructor(a: any, b?: any) {
     if (b === null || b === undefined) {
       this.ref = a.ref
-      this.data = toOutput(a.data() as T)
+      this.data = convertToOutput(a.data() as T)
     } else {
       this.ref = a
       this.data = b
@@ -45,32 +45,32 @@ export class Snapshot<T extends Tart.Timestamps> {
 
   save() {
     this.setCreatedDate()
-    return this.ref.set(toInput(this.data))
+    return this.ref.set(convertToInput(this.data))
   }
 
   saveWithBatch(batch: firebase.firestore.WriteBatch) {
     this.setCreatedDate()
-    batch.set(this.ref, toInput(this.data))
+    batch.set(this.ref, convertToInput(this.data))
   }
 
   saveReferenceCollection<S extends Tart.Timestamps>(collectionName: string, snapshot: Snapshot<S>) {
     const rc = this.ref.collection(collectionName).doc(snapshot.ref.id)
-    return rc.set(toInput({ createdAt: new Date(), updatedAt: new Date() }))
+    return rc.set(convertToInput({ createdAt: new Date(), updatedAt: new Date() }))
   }
 
   saveReferenceCollectionWithBatch<S extends Tart.Timestamps>(batch: firebase.firestore.WriteBatch, collectionName: string, snapshot: Snapshot<S>) {
     const rc = this.ref.collection(collectionName).doc(snapshot.ref.id)
-    batch.set(rc, toInput({ createdAt: new Date(), updatedAt: new Date() }))
+    batch.set(rc, convertToInput({ createdAt: new Date(), updatedAt: new Date() }))
   }
 
   saveNestedCollection<S extends Tart.Timestamps>(collectionName: string, snapshot: Snapshot<S>) {
     const rc = this.ref.collection(collectionName).doc(snapshot.ref.id)
-    return rc.set(toInput(snapshot.data))
+    return rc.set(convertToInput(snapshot.data))
   }
 
   saveNestedCollectionWithBatch<S extends Tart.Timestamps>(batch: firebase.firestore.WriteBatch, collectionName: string, snapshot: Snapshot<S>) {
     const rc = this.ref.collection(collectionName).doc(snapshot.ref.id)
-    batch.set(rc, toInput(snapshot.data))
+    batch.set(rc, convertToInput(snapshot.data))
   }
 
   async fetchNestedCollections<S extends Tart.Timestamps>(collectionName: string) {
@@ -86,7 +86,7 @@ export class Snapshot<T extends Tart.Timestamps> {
     Object.keys(data).forEach(key => {
       this.data[key] = data[key]
     })
-    return this.ref.update(toInput(data))
+    return this.ref.update(convertToInput(data))
   }
 
   updateWithBatch(batch: firebase.firestore.WriteBatch, data: Partial<T>) {
@@ -94,7 +94,7 @@ export class Snapshot<T extends Tart.Timestamps> {
     Object.keys(data).forEach(key => {
       this.data[key] = data[key]
     })
-    batch.update(this.ref, toInput(data))
+    batch.update(this.ref, convertToInput(data))
   }
 
   delete() {
@@ -129,8 +129,9 @@ export const fetch = async <T extends Tart.Timestamps>(pathOrDocumentReference: 
   return new Snapshot<T>(ds)
 }
 
-function toInput<T extends Tart.Timestamps>(data: T) {
+const convertToInput = <T extends Tart.Timestamps>(data: T) => {
   let result: any = {}
+
   for (let attr in data) {
     if (data[attr] instanceof Date) {
       if (!data[attr]) {
@@ -142,10 +143,13 @@ function toInput<T extends Tart.Timestamps>(data: T) {
       result[attr] = data[attr]
     }
   }
+
   return result
 }
-function toOutput<T extends Tart.Timestamps>(data: T) {
+
+const convertToOutput = <T extends Tart.Timestamps>(data: T) => {
   let result: any = {}
+
   for (let attr in data) {
     if (data[attr] instanceof firebase.firestore.Timestamp) {
       if (!data[attr]) {
@@ -157,5 +161,6 @@ function toOutput<T extends Tart.Timestamps>(data: T) {
       result[attr] = data[attr]
     }
   }
+
   return result
 }

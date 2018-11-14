@@ -25,6 +25,10 @@ firebase.initializeApp(config)
 
 const auth = firebase.auth()
 const firestore = firebase.firestore()
+
+// Torte expects timestampsInSnapshots to be 'true'
+firestore.settings({ timestampsInSnapshots: true })
+
 Torte.initialize(firestore)
 ```
 

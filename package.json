@@ -27,7 +27,7 @@
   "homepage": "https://github.com/starhoshi/torte#readme",
   "devDependencies": {
     "@google-cloud/firestore": "^0.14.1",
-    "@star__hoshi/tart": "^0.5.0",
+    "@star__hoshi/tart": "^0.10.0",
     "@types/jest": "^23.1.1",
     "firebase": "^5.0.4",
     "firebase-tools": "^3.18.6",

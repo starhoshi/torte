@@ -292,9 +292,9 @@
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
 
-"@star__hoshi/tart@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@star__hoshi/tart/-/tart-0.5.0.tgz#a261dad13e57561e337a928cc4568c1972b32052"
+"@star__hoshi/tart@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@star__hoshi/tart/-/tart-0.10.0.tgz#b2b6042de68539df54213f96f4765fdbcbe9b8b8"
 
 "@types/caseless@*":
   version "0.12.1"

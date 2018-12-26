@@ -25,12 +25,12 @@
     "url": "https://github.com/starhoshi/torte/issues"
   },
   "homepage": "https://github.com/starhoshi/torte#readme",
+  "peerDependencies": {
+    "firebase": "5.7.0"
+  },
   "devDependencies": {
-    "@google-cloud/firestore": "^0.14.1",
-    "@star__hoshi/tart": "^0.10.0",
+    "firebase": "5.7.0",
     "@types/jest": "^23.1.1",
-    "firebase": "^5.0.4",
-    "firebase-tools": "^3.18.6",
     "jest": "^23.1.0",
     "ts-jest": "^22.4.2",
     "tslint": "^5.9.1",

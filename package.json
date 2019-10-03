@@ -26,10 +26,10 @@
   },
   "homepage": "https://github.com/starhoshi/torte#readme",
   "peerDependencies": {
-    "firebase": "5.7.0"
+    "firebase": "^7.0.0"
   },
   "devDependencies": {
-    "firebase": "5.7.0",
+    "firebase": "^7.0.0",
     "@types/jest": "^23.1.1",
     "jest": "^23.1.0",
     "ts-jest": "^22.4.2",

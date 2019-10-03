@@ -1,4 +1,5 @@
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
 declare type Partial<T> = {
     [P in keyof T]?: T[P];
 };
